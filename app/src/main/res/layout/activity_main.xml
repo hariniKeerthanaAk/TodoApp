@@ -19,12 +19,27 @@
         android:layout_below="@id/editTextTaskName"
         android:layout_margin="16dp"/>
 
+    <EditText
+        android:id="@+id/editTextEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Date (YYYY-MM-DD)"
+        android:layout_below="@id/editTextTaskDescription"
+        android:layout_margin="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextEndDate"
+        android:layout_margin="16dp"/>
+
     <Button
         android:id="@+id/buttonAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Task"
-        android:layout_below="@id/editTextTaskDescription"
+        android:layout_below="@id/spinnerPriority"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 

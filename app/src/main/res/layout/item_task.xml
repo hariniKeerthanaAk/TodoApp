@@ -20,6 +20,20 @@
         android:textSize="16sp"
         android:text="Task Description"/>
 
+    <TextView
+        android:id="@+id/textViewPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Task Priority"/>
+
+    <TextView
+        android:id="@+id/textViewEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Task End date"/>
+
     <ImageButton
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"

@@ -50,18 +50,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public class TaskViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewName;
         private TextView textViewDescription;
+
+        private TextView textViewPriority;
+        private TextView textViewEndDate;
         private ImageButton buttonDelete;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
+            textViewPriority = itemView.findViewById(R.id.textViewPriority);
+            textViewEndDate = itemView.findViewById(R.id.textViewEndDate);
             buttonDelete = itemView.findViewById(R.id.buttonDelete);
         }
 
         public void bind(Task task) {
             textViewName.setText(task.getName());
             textViewDescription.setText(task.getDescription());
+            textViewPriority.setText(task.getPriority());
+            textViewEndDate.setText(task.getEndDate());
             buttonDelete.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 taskList.remove(position);
