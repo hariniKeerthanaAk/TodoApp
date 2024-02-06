@@ -1,5 +1,11 @@
 package com.harini.todoapp;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.harini.todoapp.MainActivity.SHARED_PREFS;
+import static com.harini.todoapp.MainActivity.TASK_LIST_KEY;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +15,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private List<Task> taskList;
 
-    public TaskAdapter(List<Task> taskList) {
+    private Context context;
+
+    public TaskAdapter(Context context, List<Task> taskList) {
         this.taskList = taskList;
+        this.context = context;
     }
 
     @NonNull
@@ -51,14 +62,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public void bind(Task task) {
             textViewName.setText(task.getName());
             textViewDescription.setText(task.getDescription());
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    taskList.remove(position);
-                    notifyItemRemoved(position);
-                }
+            buttonDelete.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                taskList.remove(position);
+                notifyItemRemoved(position);
+                saveData();
             });
+        }
+
+        private void saveData() {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Gson gson = new Gson();
+            String json = gson.toJson(taskList);
+            editor.putString(TASK_LIST_KEY, json);
+            editor.apply();
         }
     }
 }
